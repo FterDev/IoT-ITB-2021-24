@@ -1,4 +1,4 @@
-                                                                                          #include <Arduino.h>
+#include <Arduino.h>
 
 #include <WiFi/WiFiManager.h>
 #include <MQTT/MqttClient.h>
@@ -93,8 +93,6 @@ void setup() {
 bool QwiicPeripheralsInit() {
     bool init_success = Wire.begin();
 
-  /* We lower the clock here in order to reduce I2C stalls for
-     larger QWIIC systems. */
   Wire.setClock(10000);
 
   Serial.print("Initializing LEDs...");
@@ -213,11 +211,4 @@ static void QwiicWatchDog() {
   _i2ctimeout.restart();
   delay(10);
   
-  // while (Wire.busy() || (Wire.lastError() != 0)) {
-  //   if (_i2ctimeout.isTimeout()) {
-  //     Serial.println("I2C was busy for too long. Trying to reset.");
-  //     QwiicPeripheralsInit();
-  //     break;
-  //   }
-  // }
 }
